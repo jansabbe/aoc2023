@@ -10,19 +10,22 @@ import (
 func main() {
 	file, err := os.Open("day1.txt")
 	if err != nil {
-		log.Fatal("Could not open file", err)
+		log.Fatalf("Could not open file: %v", err)
 	}
 	defer file.Close()
 
 	part1, err := day1.CalculatePart1(file)
 	if err != nil {
-		log.Fatal("Could not calculate part 1", err)
+		log.Fatalf("Could not calculate part 1 because %v", err)
 	}
 
-	file.Seek(0, 0)
+	if _, err := file.Seek(0, 0); err != nil {
+		log.Fatalf("Could not seek to beginning of file, %v", err)
+	}
+
 	part2, err := day1.CalculatePart2(file)
 	if err != nil {
-		log.Fatal("Could not calculate part 2", err)
+		log.Fatalf("Could not calculate part 2 because %v", err)
 	}
 
 	fmt.Printf("Day 1, part 1: %d\n", part1)

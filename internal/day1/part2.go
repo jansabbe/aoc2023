@@ -25,6 +25,10 @@ func CalculatePart2(input io.Reader) (int, error) {
 
 		sum += (first * 10) + last
 	}
+
+	if err := scanner.Err(); err != nil {
+		return 0, err
+	}
 	return sum, nil
 }
 
@@ -62,7 +66,7 @@ func firstDigitOrNumber(line string, numbers map[string]int) (int, error) {
 			}
 		}
 	}
-	return 0, fmt.Errorf("no first digit or number found in line [%s]", line)
+	return 0, fmt.Errorf("no first digit or number found in line %q", line)
 
 }
 
@@ -80,5 +84,5 @@ func lastDigitOrNumber(line string, numbers map[string]int) (int, error) {
 			}
 		}
 	}
-	return 0, fmt.Errorf("no last digit or number found in line [%s]", line)
+	return 0, fmt.Errorf("no last digit or number found in line %q", line)
 }

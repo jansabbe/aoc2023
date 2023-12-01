@@ -23,6 +23,10 @@ func CalculatePart1(input io.Reader) (int, error) {
 		}
 		sum += (first * 10) + last
 	}
+
+	if err := scanner.Err(); err != nil {
+		return 0, err
+	}
 	return sum, nil
 }
 
@@ -33,7 +37,7 @@ func firstDigit(line string) (int, error) {
 			return int(char - '0'), nil
 		}
 	}
-	return 0, fmt.Errorf("no first digit found in line [%s]", line)
+	return 0, fmt.Errorf("no first digit found in line %q", line)
 }
 
 func lastDigit(line string) (int, error) {
@@ -43,5 +47,5 @@ func lastDigit(line string) (int, error) {
 			return int(char - '0'), nil
 		}
 	}
-	return 0, fmt.Errorf("no last digit found in line [%s]", line)
+	return 0, fmt.Errorf("no last digit found in line %q", line)
 }
