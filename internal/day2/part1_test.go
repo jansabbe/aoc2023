@@ -1,9 +1,10 @@
 package day2
 
 import (
-	"gotest.tools/v3/assert"
 	"strings"
 	"testing"
+
+	"gotest.tools/v3/assert"
 )
 
 func TestPart1(t *testing.T) {
