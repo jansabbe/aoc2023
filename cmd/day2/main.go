@@ -14,7 +14,7 @@ func main() {
 	}
 	defer file.Close()
 
-	part1, err := day2.SumImpossibleGame(file)
+	part1, err := day2.SumPossibleGames(file)
 	if err != nil {
 		log.Fatalf("Could not calculate part 1 because %v", err)
 	}
@@ -22,6 +22,11 @@ func main() {
 	if _, err := file.Seek(0, 0); err != nil {
 		log.Fatalf("Could not seek to beginning of file, %v", err)
 	}
+	part2, err := day2.CubeMinimumGame(file)
+	if err != nil {
+		log.Fatalf("Could not calculate part 2 because %v", err)
+	}
 
 	fmt.Printf("Day 2, part 1: %d\n", part1)
+	fmt.Printf("Day 2, part 2: %d\n", part2)
 }

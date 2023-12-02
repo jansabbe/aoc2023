@@ -5,7 +5,7 @@ import (
 	"io"
 )
 
-func SumPossibleGames(input io.Reader) (int, error) {
+func CubeMinimumGame(input io.Reader) (int, error) {
 	scanner := bufio.NewScanner(input)
 	sum := 0
 	for scanner.Scan() {
@@ -14,9 +14,7 @@ func SumPossibleGames(input io.Reader) (int, error) {
 		if err != nil {
 			return 0, err
 		}
-		if game.IsPossible(Set{Red: 12, Green: 13, Blue: 14}) {
-			sum += game.Id
-		}
+		sum += game.Power()
 	}
 
 	if err := scanner.Err(); err != nil {
