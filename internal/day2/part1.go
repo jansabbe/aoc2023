@@ -74,7 +74,7 @@ func getColorValue(value string, regex *regexp.Regexp) int {
 	if matches := regex.FindStringSubmatch(value); matches != nil {
 		result, err := strconv.Atoi(matches[1])
 		if err != nil {
-			log.Fatalf("matched %d but could not parse as int %v", matches[1], err)
+			log.Fatalf("matched %v but could not parse as int %v", matches[1], err)
 		}
 		return result
 	}
