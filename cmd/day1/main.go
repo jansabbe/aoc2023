@@ -8,7 +8,7 @@ import (
 func main() {
 	puzzle.Solve(puzzle.Opts{
 		Filename: "day1.txt",
-		Part1:    puzzle.IntSolverFunc(day1.CalculatePart1),
-		Part2:    puzzle.IntSolverFunc(day1.CalculatePart2),
+		Part1:    puzzle.IntFunc(day1.CalculatePart1),
+		Part2:    puzzle.IntFunc(day1.CalculatePart2),
 	})
 }
