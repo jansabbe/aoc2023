@@ -2,32 +2,13 @@ package main
 
 import (
 	"aoc2023/internal/day1"
-	"fmt"
-	"log"
-	"os"
+	"aoc2023/internal/puzzle"
 )
 
 func main() {
-	file, err := os.Open("day1.txt")
-	if err != nil {
-		log.Fatalf("Could not open file: %v", err)
-	}
-	defer file.Close()
-
-	part1, err := day1.CalculatePart1(file)
-	if err != nil {
-		log.Fatalf("Could not calculate part 1 because %v", err)
-	}
-
-	if _, err := file.Seek(0, 0); err != nil {
-		log.Fatalf("Could not seek to beginning of file, %v", err)
-	}
-
-	part2, err := day1.CalculatePart2(file)
-	if err != nil {
-		log.Fatalf("Could not calculate part 2 because %v", err)
-	}
-
-	fmt.Printf("Day 1, part 1: %d\n", part1)
-	fmt.Printf("Day 1, part 2: %d\n", part2)
+	puzzle.Solve(puzzle.Opts{
+		Filename: "day1.txt",
+		Part1:    puzzle.IntSolverFunc(day1.CalculatePart1),
+		Part2:    puzzle.IntSolverFunc(day1.CalculatePart2),
+	})
 }
