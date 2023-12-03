@@ -9,5 +9,6 @@ func main() {
 	puzzle.Solve(puzzle.Opts{
 		Filename: "day3.txt",
 		Part1:    puzzle.IntFunc(day3.SumPartNumbers),
+		Part2:    puzzle.IntFunc(day3.SumGears),
 	})
 }

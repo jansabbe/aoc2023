@@ -31,10 +31,10 @@ func (t Token) IsNeighbour(neighbour Token) bool {
 	return false
 }
 
-func (t Token) FindNeighbours(tokens []Token) []Token {
+func (t Token) FindNeighbours(tokens []Token, tokenType TokenType) []Token {
 	var result []Token
 	for _, potentialNeighbour := range tokens {
-		if t.IsNeighbour(potentialNeighbour) {
+		if t.IsNeighbour(potentialNeighbour) && potentialNeighbour.Type == tokenType {
 			result = append(result, potentialNeighbour)
 		}
 	}

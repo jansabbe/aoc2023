@@ -1,9 +1,10 @@
 package day3
 
 import (
-	"gotest.tools/v3/assert"
 	"strings"
 	"testing"
+
+	"gotest.tools/v3/assert"
 )
 
 func TestScanner_Tokens(t *testing.T) {
