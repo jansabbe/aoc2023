@@ -16,7 +16,7 @@ func NewScanner(reader io.Reader) Scanner {
 	return Scanner{
 		reader:   bufio.NewReader(reader),
 		line:     0,
-		position: 0,
+		position: -1,
 	}
 }
 
@@ -29,15 +29,14 @@ func (r *Scanner) Tokens() []Token {
 }
 func (r *Scanner) Token() Token {
 	for {
-		position := r.position
 		char, err := r.readNext()
 
 		if err != nil {
 			return Token{
 				Type:       EOF,
 				Line:       r.line,
-				StartIndex: position,
-				EndIndex:   position,
+				StartIndex: r.position,
+				EndIndex:   r.position,
 			}
 		}
 
@@ -45,16 +44,15 @@ func (r *Scanner) Token() Token {
 			return Token{
 				Type:       SYMBOL,
 				Line:       r.line,
-				StartIndex: position,
-				EndIndex:   position,
+				StartIndex: r.position,
+				EndIndex:   r.position,
 				Value:      string(char),
 			}
 		}
 
 		if unicode.IsDigit(char) {
 			value := int(char - '0')
-			startIndex := position
-			endIndex := position
+			startIndex := r.position
 			for {
 				if !r.isNextDigit() {
 					break
@@ -64,25 +62,17 @@ func (r *Scanner) Token() Token {
 					break
 				}
 				value = (value * 10) + int(nextChar-'0')
-				endIndex += 1
 			}
 
 			return Token{
 				Type:       NUMBER,
 				Line:       r.line,
 				StartIndex: startIndex,
-				EndIndex:   endIndex,
+				EndIndex:   r.position,
 				IntValue:   value,
 			}
 		}
-
-		if char == '\n' {
-			r.line += 1
-			r.position = 0
-		}
-
 	}
-
 }
 
 func (r *Scanner) isNextDigit() bool {
@@ -95,6 +85,11 @@ func (r *Scanner) readNext() (rune, error) {
 	if err != nil {
 		return 0, err
 	}
-	r.position += 1
+	if nextChar == '\n' {
+		r.line += 1
+		r.position = -1
+	} else {
+		r.position += 1
+	}
 	return nextChar, nil
 }
