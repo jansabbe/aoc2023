@@ -14,7 +14,7 @@ func CalculatePart1(input io.Reader) (int, error) {
 		if err != nil {
 			return 0, err
 		}
-		sum += card.Score()
+		sum += card.Score1()
 	}
 
 	if err := scanner.Err(); err != nil {

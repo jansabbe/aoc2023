@@ -11,19 +11,25 @@ import (
 type Card struct {
 	HaveNumbers    []int
 	WinningNumbers []int
+	Copies         int
 }
 
-func (c Card) Score() int {
+func (c *Card) Score1() int {
+	result := c.MatchingCards()
+	if result == 0 {
+		return 0
+	}
+	return int(math.Exp2(float64(result - 1)))
+}
+
+func (c *Card) MatchingCards() int {
 	result := 0
 	for _, winningNumber := range c.WinningNumbers {
 		if slices.Contains(c.HaveNumbers, winningNumber) {
 			result += 1
 		}
 	}
-	if result == 0 {
-		return 0
-	}
-	return int(math.Exp2(float64(result - 1)))
+	return result
 }
 
 func ParseCard(line string) (Card, error) {
@@ -46,6 +52,7 @@ func ParseCard(line string) (Card, error) {
 	return Card{
 		HaveNumbers:    haveNumbers,
 		WinningNumbers: winningNumbers,
+		Copies:         1,
 	}, nil
 }
 
