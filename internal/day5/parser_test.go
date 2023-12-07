@@ -1,9 +1,10 @@
 package day5
 
 import (
-	"gotest.tools/v3/assert"
 	"strings"
 	"testing"
+
+	"gotest.tools/v3/assert"
 )
 
 func TestParse(t *testing.T) {
